@@ -88,16 +88,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
 
     case M_RMASH:
-	  tap_code(KC_LEFT);
-	  tap_code(KC_LEFT);
-	  tap_code(KC_LEFT);
-	  tap_code(KC_LEFT);
-	  tap_code(KC_LEFT);
-	  tap_code(KC_LEFT);
-	  tap_code(KC_LEFT);
-	  tap_code(KC_LEFT);
-	  tap_code(KC_LEFT);
-	  tap_code(KC_LEFT);
+	  tap_code(KC_RGHT);
+	  tap_code(KC_RGHT);
+	  tap_code(KC_RGHT);
+	  tap_code(KC_RGHT);
+	  tap_code(KC_RGHT);
+	  tap_code(KC_RGHT);
+	  tap_code(KC_RGHT);
+	  tap_code(KC_RGHT);
+	  tap_code(KC_RGHT);
+	  tap_code(KC_RGHT);
       break;
 
     case M_O: // 改行
