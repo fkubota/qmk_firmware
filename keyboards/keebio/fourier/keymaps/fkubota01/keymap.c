@@ -15,6 +15,9 @@ enum custom_keycodes {
   M_LMASH,
   M_RMASH,
   M_O,
+  M_I,
+  M_Y,
+  M_P,
 };
 
 #define KC_FN1 MO(_FN1)
@@ -38,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN2] = LAYOUT(
-    KC_TILD, KC_EXLM, M_WORD,  KC_PGUP, KC_PGDN, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, M_O,     KC_RPRN, KC_UNDS, KC_PLUS,
+    KC_TILD, KC_EXLM, M_WORD,  KC_PGUP, KC_PGDN, KC_PERC, M_Y,     KC_AMPR, M_I,     M_O,     M_P,      KC_UNDS, KC_PLUS,
     _______, KC_HOME, M_LMASH, M_RMASH, KC_END,  KC_HOME, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, M_PASS,          _______,
     _______, _______, _______, KC_DEL,  KC_PGDN, KC_END,           KC_BSPC, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, KC_ESC,           _______,                   _______, _______, _______, _______
@@ -109,6 +112,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		unregister_code(KC_ENT);
       }
       break;
+
+    case M_I: // 一行選択
+      if (record->event.pressed) {
+		register_code(KC_END);
+      } else {
+		unregister_code(KC_END);
+      }
+      if (record->event.pressed) {
+		register_code16(LSFT(KC_HOME));
+      } else {
+		unregister_code16(LSFT(KC_HOME));
+      }
+      break;
+
+    case M_Y: // コピー
+      if (record->event.pressed) {
+		register_code16(LCTL(KC_C));
+      } else {
+		unregister_code16(LCTL(KC_C));
+      }
+	  break;
+
+    case M_P: // ペースト
+      if (record->event.pressed) {
+		register_code16(LCTL(KC_V));
+      } else {
+		unregister_code16(LCTL(KC_V));
+      }
+	  break;
   }
   return true;
 };
