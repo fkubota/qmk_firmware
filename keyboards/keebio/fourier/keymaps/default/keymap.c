@@ -10,6 +10,8 @@
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
+  QMKBEST = SAFE_RANGE,
+  M_PASS = SAFE_RANGE,    // pass ward
 };
 
 #define KC_FN1 MO(_FN1)
@@ -17,12 +19,34 @@ enum custom_keycodes {
 #define SPFN1 LT(_FN1, KC_SPACE)
 #define BSFN2 LT(_FN2, KC_BSPC)
 
+// macro
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//     if (record->event.pressed) {
+//         switch(keycode) {
+//             case M_PASS:
+//                     SEND_STRING("ilikemcu7137");
+//                 return false;
+//         }
+//     }
+//     return true;
+// };
+//
+// // write
+// const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+//   [0] = {
+//     {M_PASS}
+//   }
+// };
+
+
+
+// layout
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT(
     KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_DEL,  KC_BSPC,
     KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT,          KC_ENT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,             KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    KC_LCTL, KC_LALT, KC_LGUI, KC_FN1,  SPFN1,            BSFN2,                     KC_RGUI, KC_RALT, KC_FN2,  KC_RCTL
+    KC_LCTL, KC_LALT, KC_LGUI, KC_FN1,  SPFN1,            BSFN2,                     KC_RGUI, KC_RALT, QMKBEST,  KC_RCTL
   ),
 
   [_FN1] = LAYOUT(
@@ -34,9 +58,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FN2] = LAYOUT(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_PLUS,
-    _______, _______, _______, KC_INS,  KC_PGUP, KC_HOME, _______, _______, _______, _______, KC_COLN,          _______,
+    _______, _______, _______, KC_INS,  KC_PGUP, KC_HOME, _______, _______, _______, _______, QMKBEST,          _______,
     _______, _______, _______, KC_DEL,  KC_PGDN, KC_END,  _______,          _______, _______, _______, _______, _______,
     _______, _______, _______, _______, KC_DEL,           _______,                   _______, _______, _______, _______
   )
 
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case QMKBEST:
+      if (record->event.pressed) {
+        // when keycode QMKBEST is pressed
+        SEND_STRING("QMK is the best thing ever!");
+      } else {
+        // when keycode QMKBEST is released
+      }
+      break;
+
+  }
+  return true;
 };
