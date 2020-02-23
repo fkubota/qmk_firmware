@@ -25,4 +25,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define TAP_CODE_DELAY 10
 // #define TAPPING_FORCE_HOLD
 #define PERMISSIVE_HOLD
-#define TAPPING_TERM 100
+#define TAPPING_TERM 200
